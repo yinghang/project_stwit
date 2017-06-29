@@ -1,0 +1,43 @@
+<div class="page-header">
+<div class="jumbotron text-center">
+	<h1>Project STWITS</h1>
+
+	<div ng-if="!main.loggedIn">
+		<p>Utilize sentiment analysis to determine the investor sentiment for a particular stock!</p>
+		<form ng-submit="login.doLogin()">
+			<div class="alert alert-danger" ng-if="login.error">
+				{{ login.error }}
+			</div>
+
+			<button type="submit" class="btn btn-primary">
+				<span ng-if="!login.processing">Login with Stock Twits!</span>
+				<span ng-if="login.processing" class="spinner"><span class="glyphicon glyphicon-repeat"></span></span>
+			</button>
+		</form>
+		<br><br><br><br><br>
+	</div>
+
+	<div ng-if="main.loggedIn">
+		<p>Welcome! Look up the sentiment for a particular ticker!</p>
+		<form ng-submit="login.getSentiment()">
+			<div class="alert alert-danger" ng-if="login.error">
+				{{ login.error }}
+			</div>
+
+			<div class="form-group">
+				<label class="col-sm-offset-2 col-sm-2 control-label">Ticker symbol:</label>
+				<div class="col-sm-4">
+					<input type="text" class="form-control" ng-model="login.ticker">
+				</div>
+				<button type="submit" class="btn btn-primary col-sm-2">
+					<span ng-if="!login.processing">Search!</span>
+					<span ng-if="login.processing" class="spinner"><span class="glyphicon glyphicon-repeat"></span></span>
+				</button>
+			</div>
+		</form>
+		<br><br><br><br><br>
+		<p ng-if="login.polarity">Sentiment  for {{ login.symbol }} is {{ login.polarity }} out of 4. 4 being positive and 0 being negative</p>
+	</div>
+
+</div>
+
